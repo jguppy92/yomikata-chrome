@@ -20,13 +20,12 @@ function App() {
     getData()
   }, [])
 
+  console.log(kanji.kun_readings)
+
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {kanji.kanji}
-        </p>
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -35,7 +34,28 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </header> */}
+      <div className="main-kanji">
+        <p>{kanji.kanji}</p>
+      </div>
+      <div className="kanji-detail">
+        <div className="column">
+          <p>
+            Kun'yomi: {kanji && kanji.kun_readings.join(', ')}
+          </p>
+          <p>
+            On'yomi: {kanji && kanji.on_readings.join(', ')}
+          </p>
+        </div>
+        <div className="column">
+          <p>
+            Nanori: {kanji && kanji.name_readings.join(', ')}
+          </p>
+          <p>
+            Meanings: {kanji && kanji.meanings.join(', ')}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
