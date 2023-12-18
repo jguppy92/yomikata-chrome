@@ -1,4 +1,19 @@
-console.log('test.')
+import { getKanji } from "./serviceWorker"
+
+let selectedKanji = '煙'
+let kanjiData = {}
+
+const getData = async () => {
+  try {
+    const response = await getKanji(selectedKanji)
+    kanjiData = response.data
+    console.log(kanjiData)
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+getData()
 
 const popupDiv = document.createElement('div')
 popupDiv.id = 'popup'

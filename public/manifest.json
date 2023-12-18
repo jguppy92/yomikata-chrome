@@ -20,6 +20,10 @@
         "css": ["content-scripts.css"]
       }
     ],
+    "background": {
+      "service_worker": "serviceWorker.js",
+      "type": "module"
+    },
     "host_permissions": [
       "https://developer.chrome.com/*"
     ]
