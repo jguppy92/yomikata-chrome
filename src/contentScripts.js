@@ -2,6 +2,7 @@ import { getKanji } from "./serviceWorker"
 
 let selectedKanji = '煙'
 let kanjiData = {}
+let highlightedText = []
 
 const uiElements = `
   <div className="main-kanji-div">
@@ -23,8 +24,54 @@ const uiElements = `
       <p>
         Meanings: <span id="meanings"></span>
       </p>
-      `
+    </div>
+    `
 
+
+/**
+ * recursively get all text nodes as an array for a given element
+ */
+function getTextNodes(node) {
+  var childTextNodes = [];
+
+  if (!node.hasChildNodes()) {
+      return;
+  }
+
+  var childNodes = node.childNodes;
+  for (var i = 0; i < childNodes.length; i++) {
+      if (childNodes[i].nodeType == Node.TEXT_NODE) {
+          childTextNodes.push(childNodes[i]);
+      }
+      else if (childNodes[i].nodeType == Node.ELEMENT_NODE) {
+          Array.prototype.push.apply(childTextNodes, getTextNodes(childNodes[i]));
+      }
+  }
+
+  return childTextNodes;
+}
+
+/**
+* given a text node, wrap each character in the
+* given tag.
+*/
+function wrapEachCharacter(textNode, tag) {
+  var text = textNode.nodeValue;
+  var parent = textNode.parentNode;
+
+  var characters = text.split('');
+  characters.forEach(function(character) {
+      var element = document.createElement(tag);
+      var characterNode = document.createTextNode(character);
+      element.appendChild(characterNode);
+
+      parent.insertBefore(element, textNode);
+  });
+
+  parent.removeChild(textNode);
+}
+
+// Create the popup div that will display the data.
 const popupDiv = document.createElement('div')
 popupDiv.id = 'popup'
 document.body.append(popupDiv)
@@ -35,10 +82,6 @@ const getData = async () => {
     const response = await getKanji(selectedKanji)
     kanjiData = response.data
     console.log(kanjiData)
-    // const mainKanji = document.createElement('p')
-    // mainKanji.className = 'main-kanji'
-    // mainKanji.innerHTML = kanjiData.kanji
-    // popupDiv.append(mainKanji)
     document.getElementById('popup').innerHTML = uiElements
     document.getElementById('main-kanji').textContent = kanjiData.kanji
     document.getElementById('kunyomi').textContent = kanjiData.kun_readings.join(', ')
@@ -50,7 +93,27 @@ const getData = async () => {
   }
 }
 
-getData()
+function splitPageText(e) {
+  if (e.target.id === 'popup') return
+  // get all text nodes recursively.
+var allTextNodes = getTextNodes(e.target);
+
+// wrap each character in each text node thus gathered.
+allTextNodes.forEach(function(textNode) {
+    wrapEachCharacter(textNode, 'span');
+});
+}
+
+// function joinPageText(e) {
+//   e.target.textContent = highlightedText.join('')
+//   highlightedText = []
+// }
+
+function updateSelectedKanji(e) {
+  selectedKanji = e.target.textContent
+  console.log(selectedKanji)
+  getData()
+}
 
 // Make the DIV element draggable:
 dragElement(document.getElementById("popup"));
@@ -95,3 +158,7 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
+
+document.body.addEventListener('mouseenter', splitPageText)
+// document.body.addEventListener('mouseleave', joinPageText)
+document.body.addEventListener('click', updateSelectedKanji)
