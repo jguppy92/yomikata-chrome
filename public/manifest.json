@@ -1,26 +1,26 @@
 {
-  "manifest_version": 3,
-  "name": "Yomikata",
-  "description": "A kanji dictionary extension for Chrome",
-  "version": "1.0.0",
-  "action": {
-    "default_popup": "index.html",
-    "default_title": "Open"
-  },
-  "permission": [
-    "scripting",
-    "activeTab",
-    "tabs",
-    "http://*/*", "https://*/*"
-  ],
-  "content_scripts": [
-    {
-      "matches": ["http://*/*", "https://*/*"],
-      "js": ["contentScripts.js"],
-      "css": ["content-scripts.css"]
-    }
-  ],
-  "host_permissions": [
-    "https://developer.chrome.com/*"
-  ]
-}
+    "manifest_version": 3,
+    "name": "Yomikata",
+    "description": "A kanji dictionary extension for Chrome",
+    "version": "1.0.0",
+    "action": {
+      "default_popup": "popup.html",
+      "default_title": "Open"
+    },
+    "permission": [
+      "scripting",
+      "activeTab",
+      "tabs",
+      "http://*/*", "https://*/*"
+    ],
+    "content_scripts": [
+      {
+        "matches": ["http://*/*", "https://*/*"],
+        "js": ["contentScripts.js"],
+        "css": ["content-scripts.css"]
+      }
+    ],
+    "host_permissions": [
+      "https://developer.chrome.com/*"
+    ]
+  }

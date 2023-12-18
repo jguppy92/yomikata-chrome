@@ -1,11 +1,11 @@
-console.log("test")
+console.log('test.')
 
-const htmlRoot = document.createElement('div')
-htmlRoot.id = 'root'
-document.body.append(htmlRoot)
+const popupDiv = document.createElement('div')
+popupDiv.id = 'popup'
+document.body.append(popupDiv)
 
 // Make the DIV element draggable:
-dragElement(document.getElementById("root"));
+dragElement(document.getElementById("popup"));
 
 function dragElement(elmnt) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
