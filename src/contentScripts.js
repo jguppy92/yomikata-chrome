@@ -3,11 +3,20 @@ import { getKanji } from "./serviceWorker"
 let selectedKanji = '煙'
 let kanjiData = {}
 
+const popupDiv = document.createElement('div')
+popupDiv.id = 'popup'
+document.body.append(popupDiv)
+
+// Makes a request to the API endpoint to grab the kanji data
 const getData = async () => {
   try {
     const response = await getKanji(selectedKanji)
     kanjiData = response.data
     console.log(kanjiData)
+    const mainKanji = document.createElement('p')
+    mainKanji.className = 'main-kanji'
+    mainKanji.innerHTML = kanjiData.kanji
+    popupDiv.append(mainKanji)
   } catch(err) {
     console.log(err)
   }
@@ -15,9 +24,32 @@ const getData = async () => {
 
 getData()
 
-const popupDiv = document.createElement('div')
-popupDiv.id = 'popup'
-document.body.append(popupDiv)
+function setUIElements(kanjiData) {
+  return ```
+  <div className="main-kanji">
+  <p>{kanji.kanji}</p>
+</div>
+<div className="kanji-detail">
+  <div className="column">
+    <p>
+      Kun'yomi: {kanji && kanji.kun_readings.join(', ')}
+    </p>
+    <p>
+      On'yomi: {kanji && kanji.on_readings.join(', ')}
+    </p>
+  </div>
+  <div className="column">
+    <p>
+      Nanori: {kanji && kanji.name_readings.join(', ')}
+    </p>
+    <p>
+      Meanings: {kanji && kanji.meanings.join(', ')}
+    </p>
+  ```
+}
+
+
+
 
 // Make the DIV element draggable:
 dragElement(document.getElementById("popup"));
