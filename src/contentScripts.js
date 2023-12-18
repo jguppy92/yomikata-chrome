@@ -3,6 +3,28 @@ import { getKanji } from "./serviceWorker"
 let selectedKanji = '煙'
 let kanjiData = {}
 
+const uiElements = `
+  <div className="main-kanji-div">
+    <p id="main-kanji"></p>
+  </div>
+  <div className="kanji-detail">
+    <div className="column">
+      <p>
+        Kun'yomi: <span id="kunyomi"></span>
+      </p>
+      <p>
+        On'yomi: <span id="onyomi"></span>
+      </p>
+    </div>
+    <div className="column">
+      <p>
+        Nanori: <span id="name-readings"></span>
+      </p>
+      <p>
+        Meanings: <span id="meanings"></span>
+      </p>
+      `
+
 const popupDiv = document.createElement('div')
 popupDiv.id = 'popup'
 document.body.append(popupDiv)
@@ -13,43 +35,22 @@ const getData = async () => {
     const response = await getKanji(selectedKanji)
     kanjiData = response.data
     console.log(kanjiData)
-    const mainKanji = document.createElement('p')
-    mainKanji.className = 'main-kanji'
-    mainKanji.innerHTML = kanjiData.kanji
-    popupDiv.append(mainKanji)
+    // const mainKanji = document.createElement('p')
+    // mainKanji.className = 'main-kanji'
+    // mainKanji.innerHTML = kanjiData.kanji
+    // popupDiv.append(mainKanji)
+    document.getElementById('popup').innerHTML = uiElements
+    document.getElementById('main-kanji').textContent = kanjiData.kanji
+    document.getElementById('kunyomi').textContent = kanjiData.kun_readings.join(', ')
+    document.getElementById('onyomi').textContent = kanjiData.on_readings.join(', ')
+    document.getElementById('name-readings').textContent = kanjiData.name_readings.join(', ')
+    document.getElementById('meanings').textContent = kanjiData.meanings.join(', ')
   } catch(err) {
     console.log(err)
   }
 }
 
 getData()
-
-function setUIElements(kanjiData) {
-  return ```
-  <div className="main-kanji">
-  <p>{kanji.kanji}</p>
-</div>
-<div className="kanji-detail">
-  <div className="column">
-    <p>
-      Kun'yomi: {kanji && kanji.kun_readings.join(', ')}
-    </p>
-    <p>
-      On'yomi: {kanji && kanji.on_readings.join(', ')}
-    </p>
-  </div>
-  <div className="column">
-    <p>
-      Nanori: {kanji && kanji.name_readings.join(', ')}
-    </p>
-    <p>
-      Meanings: {kanji && kanji.meanings.join(', ')}
-    </p>
-  ```
-}
-
-
-
 
 // Make the DIV element draggable:
 dragElement(document.getElementById("popup"));
