@@ -8,6 +8,19 @@
     "default_title": "Open"
   },
   "permission": [
-    "scripting"
+    "scripting",
+    "activeTab",
+    "tabs",
+    "http://*/*", "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["contentScripts.js"],
+      "css": ["content-scripts.css"]
+    }
+  ],
+  "host_permissions": [
+    "https://developer.chrome.com/*"
   ]
 }

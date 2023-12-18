@@ -1,0 +1,8 @@
+#root {
+  position: absolute;
+  background-color: pink;
+  border-style: dotted;
+  min-width: 400px;
+  min-height: 600px;
+  z-index: 100;
+}
