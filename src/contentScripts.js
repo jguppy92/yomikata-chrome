@@ -90,6 +90,7 @@ const getData = async () => {
 // }
 
 function updateSelectedKanji(e) {
+  if (e.target.id === 'popup') return
   if (!regexKanji.test(e.target.textContent)) {
     console.log('Not a valid kanji character.')
     return
