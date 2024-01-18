@@ -34,7 +34,6 @@ function wrapKanjiCharacters(node) {
   if (node.nodeType === Node.TEXT_NODE) {
       const contentText = node.textContent
       let wrappedContent = ''
-
       for (let i = 0; i < contentText.length; i++) {
           const char = contentText[i]
 
@@ -45,7 +44,6 @@ function wrapKanjiCharacters(node) {
               wrappedContent += char
           }
       }
-
       // Replace the original text node with the wrapped content
       const spanContainer = document.createElement('span')
       spanContainer.innerHTML = wrappedContent
