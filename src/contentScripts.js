@@ -4,6 +4,8 @@ let selectedKanji = '煙'
 let kanjiData = {}
 let highlightedText = []
 
+const regexKanji = /^[一-龯]+$/
+
 const uiElements = `
   <div className="main-kanji-div">
     <p id="main-kanji"></p>
@@ -28,47 +30,38 @@ const uiElements = `
     `
 
 
-/**
- * recursively get all text nodes as an array for a given element
- */
-function getTextNodes(node) {
-  var childTextNodes = [];
+function wrapKanjiCharacters(node) {
+  if (node.nodeType === Node.TEXT_NODE) {
+      const contentText = node.textContent
+      let wrappedContent = ''
 
-  if (!node.hasChildNodes()) {
-      return;
-  }
+      for (let i = 0; i < contentText.length; i++) {
+          const char = contentText[i]
 
-  var childNodes = node.childNodes;
-  for (var i = 0; i < childNodes.length; i++) {
-      if (childNodes[i].nodeType == Node.TEXT_NODE) {
-          childTextNodes.push(childNodes[i]);
+          // Check if the character is a kanji character
+          if (regexKanji.test(char)) {
+              wrappedContent += `<span class="kanji">${char}</span>`
+          } else {
+              wrappedContent += char
+          }
       }
-      else if (childNodes[i].nodeType == Node.ELEMENT_NODE) {
-          Array.prototype.push.apply(childTextNodes, getTextNodes(childNodes[i]));
+
+      // Replace the original text node with the wrapped content
+      const spanContainer = document.createElement('span')
+      spanContainer.innerHTML = wrappedContent
+      node.parentNode.replaceChild(spanContainer, node)
+  } else if (node.nodeType === Node.ELEMENT_NODE) {
+      // Recursively process child nodes
+      for (let i = 0; i < node.childNodes.length; i++) {
+          wrapKanjiCharacters(node.childNodes[i])
       }
   }
-
-  return childTextNodes;
 }
 
-/**
-* given a text node, wrap each character in the
-* given tag.
-*/
-function wrapEachCharacter(textNode, tag) {
-  var text = textNode.nodeValue;
-  var parent = textNode.parentNode;
-
-  var characters = text.split('');
-  characters.forEach(function(character) {
-      var element = document.createElement(tag);
-      var characterNode = document.createTextNode(character);
-      element.appendChild(characterNode);
-
-      parent.insertBefore(element, textNode);
-  });
-
-  parent.removeChild(textNode);
+// Call the function when the page is loaded
+window.onload = function () {
+  const contentElement = document.getElementsByTagName('body')[0]
+  wrapKanjiCharacters(contentElement);
 }
 
 // Create the popup div that will display the data.
@@ -93,23 +86,16 @@ const getData = async () => {
   }
 }
 
-function splitPageText(e) {
-  if (e.target.id === 'popup') return
-  // get all text nodes recursively.
-var allTextNodes = getTextNodes(e.target);
-
-// wrap each character in each text node thus gathered.
-allTextNodes.forEach(function(textNode) {
-    wrapEachCharacter(textNode, 'span');
-});
-}
-
 // function joinPageText(e) {
 //   e.target.textContent = highlightedText.join('')
 //   highlightedText = []
 // }
 
 function updateSelectedKanji(e) {
+  if (!regexKanji.test(e.target.textContent)) {
+    console.log('Not a valid kanji character.')
+    return
+  }
   selectedKanji = e.target.textContent
   console.log(selectedKanji)
   getData()
@@ -159,6 +145,4 @@ function dragElement(elmnt) {
   }
 }
 
-document.body.addEventListener('mouseenter', splitPageText)
-// document.body.addEventListener('mouseleave', joinPageText)
 document.body.addEventListener('click', updateSelectedKanji)
