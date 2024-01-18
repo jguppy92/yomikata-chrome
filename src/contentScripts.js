@@ -1,4 +1,5 @@
 import { getKanji } from "./serviceWorker"
+import { uiElements } from "./popup"
 
 let selectedKanji = '煙'
 let kanjiData = {}
@@ -6,28 +7,6 @@ let highlightedText = []
 
 const regexKanji = /^[一-龯]+$/
 
-const uiElements = `
-  <div className="main-kanji-div">
-    <p id="main-kanji"></p>
-  </div>
-  <div className="kanji-detail">
-    <div className="column">
-      <p>
-        Kun'yomi: <span id="kunyomi"></span>
-      </p>
-      <p>
-        On'yomi: <span id="onyomi"></span>
-      </p>
-    </div>
-    <div className="column">
-      <p>
-        Nanori: <span id="name-readings"></span>
-      </p>
-      <p>
-        Meanings: <span id="meanings"></span>
-      </p>
-  </div>
-`
 function wrapKanjiCharacters(node) {
   if (node.nodeType === Node.TEXT_NODE) {
       const contentText = node.textContent
