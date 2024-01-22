@@ -100,7 +100,7 @@ function removeHighlight(e) {
 }
 
 // Make the DIV element draggable:
-dragElement(document.getElementById("popup"));
+dragElement(document.getElementById('popup'));
 
 function dragElement(elmnt) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;

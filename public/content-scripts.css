@@ -1,6 +1,12 @@
+* {
+  --yomikata-yellow: #f3e044;
+}
+
 #popup {
-    position: absolute;
-    background-color: pink;
+    position: fixed;
+    background-attachment: scroll;
+    top: 0;
+    background-color: var(--yomikata-yellow);
     border-style: dotted;
     min-width: 400px;
     min-height: 600px;

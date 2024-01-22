@@ -5,7 +5,10 @@
     "version": "1.0.0",
     "action": {
       "default_popup": "popup.html",
-      "default_title": "Open"
+      "default_title": "Open",
+      "default_icon": {
+        "32": "./icon32.png"
+      }
     },
     "permission": [
       "scripting",
