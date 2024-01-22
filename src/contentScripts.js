@@ -33,10 +33,25 @@ function wrapKanjiCharacters(node) {
   }
 }
 
+// Disables links to allow kanji in links to become clickable.
+function removeLinkHrefValues() {
+  const allLinks = document.getElementsByTagName('a')
+  for (let i = 0; i < allLinks.length; i++) {
+    allLinks[i].href = ''
+    allLinks[i].classList.add('isDisabled')
+    allLinks[i].addEventListener('click', function (e) {
+      if (allLinks[i].classList.contains('isDisabled')) {
+        e.preventDefault()
+      }
+    })
+  }
+}
+
 // Call the function when the page is loaded
 window.onload = function () {
   const contentElement = document.getElementsByTagName('body')[0]
-  wrapKanjiCharacters(contentElement);
+  wrapKanjiCharacters(contentElement)
+  removeLinkHrefValues()
 }
 
 // Create the popup div that will display the data.
