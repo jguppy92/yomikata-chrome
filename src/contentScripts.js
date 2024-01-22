@@ -1,5 +1,5 @@
 import { getKanji } from "./serviceWorker"
-import { uiElements } from "./popup"
+import { uiElements, navbar } from "./popup"
 
 let selectedKanji = '煙'
 let kanjiData = {}
@@ -56,8 +56,16 @@ window.onload = function () {
 
 // Create the popup div that will display the data.
 const popupDiv = document.createElement('div')
+const popupNav = document.createElement('div')
+const popupBody = document.createElement('div')
 popupDiv.id = 'popup'
+popupNav.classList.add('popup-nav')
+popupBody.classList.add('popup-body')
 document.body.append(popupDiv)
+popupNav.innerHTML = navbar
+popupDiv.append(popupNav)
+popupBody.innerHTML = uiElements
+popupDiv.append(popupBody)
 
 // Makes a request to the API endpoint to grab the kanji data
 const getData = async () => {
@@ -65,7 +73,7 @@ const getData = async () => {
     const response = await getKanji(selectedKanji)
     kanjiData = response.data
     console.log(kanjiData)
-    document.getElementById('popup').innerHTML = uiElements
+    // document.getElementById('popup').innerHTML = uiElements
     document.getElementById('main-kanji').textContent = kanjiData.kanji
     document.getElementById('kunyomi').textContent = kanjiData.kun_readings.join(', ')
     document.getElementById('onyomi').textContent = kanjiData.on_readings.join(', ')

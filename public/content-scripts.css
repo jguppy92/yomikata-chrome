@@ -1,18 +1,57 @@
 * {
-  --yomikata-yellow: #f3e044;
+    --yomikata-main: #f3e044;
 }
 
 #popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: fixed;
     background-attachment: scroll;
-    top: 0;
-    background-color: var(--yomikata-yellow);
+    top: 20px;
+    left: 50px;
+    background-color: white;
     border-style: dotted;
-    min-width: 400px;
-    min-height: 600px;
+    min-width: 600px;
+    min-height: 400px;
     z-index: 100;
-  }
+    padding: 0;
+    margin: 0;
+}
 
-  .highlighted {
+.popup-nav {
+    background: var(--yomikata-main);
+    width: 100%;
+    height: 60px;
+}
+
+.popup-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.popup-nav li {
+  float: left;
+}
+
+.popup-nav li h1 {
+  display: block;
+  text-align: center;
+  padding: 10px 16px;
+  border-bottom: none;
+}
+
+.help li {
+  float: right;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+}
+
+.highlighted {
     background-color: lightblue;
-  }
+}
