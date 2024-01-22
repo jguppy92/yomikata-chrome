@@ -73,13 +73,13 @@ function updateSelectedKanji(e) {
 }
 
 function addHighlight(e) {
-  if (e.target.classList.value.includes('kanji')) {
+  if (e.target.classList.contains('kanji')) {
     e.target.classList.add('highlighted')
   }
 }
 
 function removeHighlight(e) {
-  if (e.target.classList.value.includes('highlighted')) {
+  if (e.target.classList.contains('highlighted')) {
     e.target.classList.remove('highlighted')
   }
 }
