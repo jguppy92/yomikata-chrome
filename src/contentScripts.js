@@ -72,6 +72,18 @@ function updateSelectedKanji(e) {
   getData()
 }
 
+function addHighlight(e) {
+  if (e.target.classList.value.includes('kanji')) {
+    e.target.classList.add('highlighted')
+  }
+}
+
+function removeHighlight(e) {
+  if (e.target.classList.value.includes('highlighted')) {
+    e.target.classList.remove('highlighted')
+  }
+}
+
 // Make the DIV element draggable:
 dragElement(document.getElementById("popup"));
 
@@ -117,3 +129,5 @@ function dragElement(elmnt) {
 }
 
 document.body.addEventListener('click', updateSelectedKanji)
+document.body.addEventListener('mouseover', addHighlight)
+document.body.addEventListener('mouseout', removeHighlight)
