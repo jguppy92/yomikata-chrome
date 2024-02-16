@@ -12,16 +12,20 @@ export const uiElements = `
   </div>
   <dl className="kanji-detail">
     <dt>
-      Kun'yomi: <dd id="kunyomi"></dd>
+      Kun'yomi: 
     </dt>
+    <dd id="kunyomi"></dd>
     <dt>
-      On'yomi: <dd id="onyomi"></dd>
+      On'yomi: 
     </dt>
+    <dd id="onyomi"></dd>
     <dt>
-      Nanori: <dd id="name-readings"></dd>
+      Nanori: 
     </dt>
+    <dd id="name-readings"></dd>
     <dt>
-      Meanings: <dd id="meanings"></dd>
+      Meanings: 
     </dt>
+    <dd id="meanings"></dd>
   </dl>
 `

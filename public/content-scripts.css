@@ -66,11 +66,10 @@
   max-width: calc(600px / 100 * 75);
 }
 
-dl {
+dl, dd, dt {
   left: 20;
-}
-
-dd {
+  width: 400px;
   max-width: 400px;
   text-wrap: balance;
+  line-break: loose;
 }
