@@ -6,6 +6,10 @@ export const navbar = `
   </ul>
 `
 
+export const uiOnLoadMessage = `
+  <h2>Please click a valid kanji in your web browser window.</h2>
+`
+
 export const uiElements = `
   <div className="main-kanji-div">
     <p id="main-kanji"></p>

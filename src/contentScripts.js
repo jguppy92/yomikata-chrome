@@ -1,5 +1,5 @@
 import { getKanji } from "./serviceWorker"
-import { uiElements, navbar } from "./popup"
+import { uiElements, navbar, uiOnLoadMessage } from "./popup"
 
 let selectedKanji = '煙'
 let kanjiData = {}
