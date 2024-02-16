@@ -54,6 +54,7 @@
 
 .highlighted {
     background-color: lightblue;
+    cursor: pointer;
 }
 
 #main-kanji {
