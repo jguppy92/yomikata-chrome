@@ -8,23 +8,20 @@ export const navbar = `
 
 export const uiElements = `
   <div className="main-kanji-div">
-  <p id="main-kanji"></p>
+    <p id="main-kanji"></p>
   </div>
-  <div className="kanji-detail">
-  <div className="column">
-    <p>
-      Kun'yomi: <span id="kunyomi"></span>
-    </p>
-    <p>
-      On'yomi: <span id="onyomi"></span>
-    </p>
-  </div>
-  <div className="column">
-    <p>
-      Nanori: <span id="name-readings"></span>
-    </p>
-    <p>
-      Meanings: <span id="meanings"></span>
-    </p>
-  </div>
+  <dl className="kanji-detail">
+    <dt>
+      Kun'yomi: <dd id="kunyomi"></dd>
+    </dt>
+    <dt>
+      On'yomi: <dd id="onyomi"></dd>
+    </dt>
+    <dt>
+      Nanori: <dd id="name-readings"></dd>
+    </dt>
+    <dt>
+      Meanings: <dd id="meanings"></dd>
+    </dt>
+  </dl>
 `

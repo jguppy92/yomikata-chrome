@@ -63,5 +63,14 @@
 
 .kanji-detail {
   text-align: center;
-  max-width: calc(600px / 100 * 30);
+  max-width: calc(600px / 100 * 75);
+}
+
+dl {
+  left: 20;
+}
+
+dd {
+  max-width: 400px;
+  text-wrap: balance;
 }
