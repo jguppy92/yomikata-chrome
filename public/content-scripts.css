@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap');
+
 * {
     --yomikata-main: #f3e044;
 }
@@ -58,6 +60,7 @@
 }
 
 #main-kanji {
+  font-family: "Noto Serif JP", serif;
   font-size: 50px;
   text-align: center;
 }
