@@ -11,6 +11,7 @@ chrome.action.onClicked.addListener(() => {
     const isEnabled = !data.enabled; // Toggle the state
     chrome.storage.local.set({ enabled: isEnabled }, () => {
       updateIcon(isEnabled); // Update the icon based on the new state
+      handleToggleAction(isEnabled); // Reload or run code based on toggle state
     });
   });
 });
@@ -19,4 +20,22 @@ chrome.action.onClicked.addListener(() => {
 function updateIcon(enabled) {
   const iconPath = enabled ? 'icon32-on.png' : 'icon32-off.png';
   chrome.action.setIcon({ path: iconPath });
+}
+
+// Function to reload page (if off) or run code (if on)
+function handleToggleAction(enabled) {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const tabId = tabs[0].id;
+    
+    if (!enabled) {
+      // Reload the current page
+      chrome.tabs.reload(tabId);
+    } else {
+      // Inject content script or execute your code
+      chrome.scripting.executeScript({
+        target: { tabId: tabId },
+        files: ['contentScripts.js'] // Assuming your code is in 'content.js'
+      });
+    }
+  });
 }

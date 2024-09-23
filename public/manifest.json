@@ -20,7 +20,7 @@
     "content_scripts": [
       {
         "matches": ["http://*/*", "https://*/*"],
-        "js": ["contentScripts.js"],
+        "js": [],
         "css": ["content-scripts.css"]
       }
     ],
@@ -29,6 +29,7 @@
       "type": "module"
     },
     "host_permissions": [
-      "https://developer.chrome.com/*"
+      "https://developer.chrome.com/*",
+      "<all_urls>"
     ]
   }

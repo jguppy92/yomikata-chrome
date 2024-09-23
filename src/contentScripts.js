@@ -1,12 +1,10 @@
 import axios from "axios"
 import { uiElements, navbar, uiOnLoadMessage } from "./popup"
 
-let selectedKanji = '煙'
-let kanjiData = {}
-let highlightedText = []
-
 const regexKanji = /^[一-龯]+$/
 const baseUrl = 'https://kanjiapi.dev/v1/kanji'
+let kanjiData = {}
+let selectedKanji = ''
 
 function getKanji(selectedKanji) {
     return axios.get(`${baseUrl}/${selectedKanji}`)
@@ -52,12 +50,10 @@ function removeLinkHrefValues() {
   }
 }
 
-// Call the function when the page is loaded
-window.onload = function () {
-  const contentElement = document.getElementsByTagName('body')[0]
-  wrapKanjiCharacters(contentElement)
-  removeLinkHrefValues()
-}
+// Perform the kanji node wrap functionality
+const contentElement = document.getElementsByTagName('body')[0]
+wrapKanjiCharacters(contentElement)
+removeLinkHrefValues()
 
 // Create the popup div that will display the data.
 const popupDiv = document.createElement('div')
