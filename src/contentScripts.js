@@ -59,7 +59,7 @@ removeLinkHrefValues()
 const popupDiv = document.createElement('div')
 const popupNav = document.createElement('div')
 const popupBody = document.createElement('div')
-popupDiv.id = 'popup'
+popupDiv.id = 'yomikata'
 popupNav.classList.add('popup-nav')
 popupBody.classList.add('popup-body')
 document.body.append(popupDiv)
@@ -86,7 +86,7 @@ const getData = async () => {
 }
 
 function updateSelectedKanji(e) {
-  if (e.target.id === 'popup') return
+  if (e.target.id === 'yomikata') return
   if (!regexKanji.test(e.target.textContent)) {
     console.log('Not a valid kanji character.')
     return
@@ -109,7 +109,7 @@ function removeHighlight(e) {
 }
 
 // Make the DIV element draggable:
-dragElement(document.getElementById('popup'));
+dragElement(document.getElementById('yomikata'));
 
 function dragElement(elmnt) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;

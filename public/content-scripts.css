@@ -4,7 +4,7 @@
     --yomikata-main: #f3e044;
 }
 
-#popup {
+#yomikata {
     display: flex;
     flex-direction: column;
     align-items: center;
