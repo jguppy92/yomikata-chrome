@@ -1,4 +1,4 @@
-import { getKanji } from "./serviceWorker"
+import axios from "axios"
 import { uiElements, navbar, uiOnLoadMessage } from "./popup"
 
 let selectedKanji = '煙'
@@ -6,6 +6,11 @@ let kanjiData = {}
 let highlightedText = []
 
 const regexKanji = /^[一-龯]+$/
+const baseUrl = 'https://kanjiapi.dev/v1/kanji'
+
+function getKanji(selectedKanji) {
+    return axios.get(`${baseUrl}/${selectedKanji}`)
+  }
 
 function wrapKanjiCharacters(node) {
   if (node.nodeType === Node.TEXT_NODE) {

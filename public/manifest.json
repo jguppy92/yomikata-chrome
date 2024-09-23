@@ -4,16 +4,17 @@
     "description": "A kanji dictionary extension for Chrome",
     "version": "1.0.0",
     "action": {
-      "default_popup": "popup.html",
+      "default_popup": "",
       "default_title": "Open",
       "default_icon": {
-        "32": "./icon32.png"
+        "32": "icon32-off.png"
       }
     },
-    "permission": [
+    "permissions": [
       "scripting",
       "activeTab",
       "tabs",
+      "storage",
       "http://*/*", "https://*/*"
     ],
     "content_scripts": [

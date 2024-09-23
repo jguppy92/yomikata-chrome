@@ -1,8 +1,22 @@
-import axios from "axios"
+// Initialize the state
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.storage.local.set({ enabled: false }, () => {
+    updateIcon(false); // Set initial state to 'off'
+  });
+});
 
-const baseUrl = 'https://kanjiapi.dev/v1/kanji'
-// const regexKanji = /^[一-龯]+$/
+// Handle icon click
+chrome.action.onClicked.addListener(() => {
+  chrome.storage.local.get('enabled', (data) => {
+    const isEnabled = !data.enabled; // Toggle the state
+    chrome.storage.local.set({ enabled: isEnabled }, () => {
+      updateIcon(isEnabled); // Update the icon based on the new state
+    });
+  });
+});
 
-export function getKanji(selectedKanji) {
-    return axios.get(`${baseUrl}/${selectedKanji}`)
-  }
+// Function to update the icon
+function updateIcon(enabled) {
+  const iconPath = enabled ? 'icon32-on.png' : 'icon32-off.png';
+  chrome.action.setIcon({ path: iconPath });
+}
